@@ -24,7 +24,7 @@ let highScore = 0;
 let timer;
 
 //reserve keyboard vars
-let keySPACE, keyRIGHT, keyLEFT, keyR;
+let keySPACE, keyRIGHT, keyLEFT, keyR,keyF;
 
 //set UI sizes
 let borderUISize = game.config.height / 15;

@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
         this.platformWidth = 31;  // Replace with the actual width of your platform
         this.platformHeight = 10;  // Replace with the actual height of your platform
         this.platformOffsetX = 0;  // Replace with the actual X offset of your platform
-        this.platformOffsetY = 8;  //platform initliazes
+        this.platformOffsetY = 8;  //platform initliazes            
     }  
 
     create() {
@@ -31,18 +31,18 @@ class Play extends Phaser.Scene {
         
 
         //moon
-        this.moon = this.add.sprite(game.config.width / 13, game.config.height - this.game.config.height / 1.125, 'sun').setScale(3.5).setOrigin(0.5);
+        this.moon = this.add.sprite(game.config.width / 13, game.config.height - this.game.config.height / 1.125, 'moon').setScale(3.5).setOrigin(0.5);
 
         // Player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'mikkie', 'mikkie 0.png').setScale(5).setOrigin(0.5);
-        this.player1.body.setSize(10, 15).setOffset(20, 17);
+        this.player1.body.setSize(9, 10.5).setOffset(21, 20);
 
     
 
         this.player1.anims.play('run');
 
         // Physics for player
-        this.player1.body.setGravityY(1000);
+        this.player1.body.setGravityY(900);
         this.player1.body.setGravityX(0);
 
         
@@ -53,49 +53,67 @@ class Play extends Phaser.Scene {
 
         //bird mob creation
         this.bird = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
-        this.bird.body.setSize(10, 12).setOffset(17,16)
+        this.bird.body.setSize(10, 8).setOffset(17,19)
         this.birdSpeed = this.bird.body.setVelocityX(-150)
         this.bird.anims.play('run2');
 
         //dog creation
         this.dogCreated = false;
         this.time.addEvent({
-            delay: 10000, // 10 seconds in milliseconds
+            delay: 8000, // 10 seconds in milliseconds
             callback: () => {
-                // Create the second bird
                 this.dog = this.physics.add.sprite(game.config.width / 1.5, game.config.height / 1.5, 'dog', 'dog 0.png').setScale(5).setOrigin(0.5);
-                this.dog.body.setSize(10, 15).setOffset(17,16);
+                this.dog.body.setSize(8, 10).setOffset(20,20);
                 this.dogSpeed = this.dog.body.setVelocityX(-150);
                 this.dog.anims.play('run3');
                 this.dogCreated = true;
+            },
+            callbackScope: this,
+            loop: false 
+        });
+
+         //dog creation
+         this.dog2Created = false;
+         this.time.addEvent({
+             delay: 29000, // 10 seconds in milliseconds
+             callback: () => {
+                 this.dog2 = this.physics.add.sprite(game.config.width / 1.5, game.config.height / 1.5, 'dog', 'dog 0.png').setScale(5).setOrigin(0.5);
+                 this.dog2.body.setSize(8, 10).setOffset(20,20);
+                 this.dog2Speed = this.dog2.body.setVelocityX(-150);
+                 this.dog2.anims.play('run3');
+                 this.dog2Created = true;
+                 //play growling sound
+             },
+             callbackScope: this,
+             loop: false 
+         });
+ 
+
+
+        this.birdCreated = false;
+        this.time.addEvent({
+            delay: 60000, // 60 seconds in milliseconds
+            callback: () => {
+                // Create the second bird
+                this.bird2 = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
+                this.bird2.body.setSize(8, 10).setOffset(20,20);
+                this.bird2Speed = this.bird2.body.setVelocityX(-150);
+                this.bird2.anims.play('run2');
+                this.birdCreated = true;
             },
             callbackScope: this,
             loop: false // Set to true if you want the event to repeat
         });
 
 
-        // this.time.addEvent({
-        //     delay: 10000, // 10 seconds in milliseconds
-        //     callback: () => {
-        //         // Create the second bird
-        //         this.secondBird = this.physics.add.sprite(game.config.width / 1.5, game.config.height / 1.45, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5);
-        //         this.secondBird.body.setSize(10, 12).setOffset(17,16);
-        //         this.secondBirdSpeed = this.secondBird.body.setVelocityX(-150);
-        //         this.secondBird.anims.play('run2');
-        //     },
-        //     callbackScope: this,
-        //     loop: false // Set to true if you want the event to repeat
-        // });
-
-
 //CLOCK and GAMESTATE
          timer = game.settings.gameTimer;
 
          let timeConfig = {
-             fontFamily: 'Courier New',
+             fontFamily: 'fantasy',
              fontSize: '30px',
-             backgroundColor: '#ADD8E6',
-             color: '#000000',
+             backgroundColor: 'rgba(173, 216, 230, 0.1)',
+             color: '#f2d13d',
              align: 'right',
              padding: {
                  top: 5,
@@ -155,7 +173,9 @@ class Play extends Phaser.Scene {
 
 
         //bird logic handling
-        let random = Phaser.Math.Between(0 + this.bird. height / 1, game.config.height / 2)
+        let random = Phaser.Math.Between(0 + this.bird.height / 1.21, game.config.height / 2.1)
+        let random2 = Phaser.Math.Between(0 + this.bird.height / 1, game.config.height / 2)
+
         this.time.delayedCall(1000,()=>{
             this.birdSpeed = this.bird.body.setVelocityX(-500);
         },null,this)
@@ -174,6 +194,31 @@ class Play extends Phaser.Scene {
             this.dog.x = game.config.width;
             this.dog.y = game.config.height / 1.5;
         }
+
+        if(this.dog2Created){
+            this.time.delayedCall(1000,()=>{
+                this.dogSpeed = this.dog.body.setVelocityX(-400);
+                this.dog2Speed = this.dog2.body.setVelocityX(-400);
+            },null,this)
+        }
+        if (this.dog2 && this.dog2.x <= 0) {
+            this.dog2.x = game.config.width;
+            this.dog2.y = game.config.height / 1.5;
+        }
+
+
+
+        if(this.birdCreated){
+            this.time.delayedCall(1000,()=>{
+                this.birdSpeed = this.bird.body.setVelocityX(-450);
+                this.bird2Speed = this.bird2.body.setVelocityX(-450);
+            },null,this)
+        }
+        if (this.bird2 && this.bird2.x <= 0) {
+            this.bird2.x = game.config.width
+            this.bird2.y = random2
+        }
+        
         
 
 
@@ -222,6 +267,22 @@ class Play extends Phaser.Scene {
             
 
         }
+
+        if(this.dog2){
+            this.physics.add.collider(this.player1, this.dog2, (player1,dog2)=>{
+               this.handleCollision()
+            })
+            
+
+        }
+
+        if(this.bird2){
+            this.physics.add.collider(this.player1, this.bird2, (player1,bird2)=>{
+               this.handleCollision()
+            })
+            
+
+        }
         
     }
 
@@ -242,8 +303,8 @@ class Play extends Phaser.Scene {
     //randomizes height
     getRandomHeight() {
     // Define a reasonable range for platform heights
-    const minHeight = game.config.height / 1.6; // Adjust as needed
-    const maxHeight = game.config.height / 2.8; // Adjust as needed
+    const minHeight = game.config.height / 1.7; // Adjust as needed
+    const maxHeight = game.config.height / 3; // Adjust as needed
 
     // Generate a random height within the defined range
     return Phaser.Math.Between(minHeight, maxHeight);
@@ -256,7 +317,7 @@ class Play extends Phaser.Scene {
             targets: platform,
             x: '-=' + (game.config.width + 2 * this.platformWidth),
             ease: 'Linear',
-            duration: 4500,
+            duration: 4750,
             repeat: -1,
         };
         this.tweens.add(platformMoveConfig);
@@ -296,21 +357,10 @@ class Play extends Phaser.Scene {
 /*
 Programming tasks we want to do:
 
--Three Mobs Total
-    -one bird will fly all over the place, ground, high up [complete]
-    -infinite killer dog will be focused on just being a floor mob [complete]
-    -third bird spawns after 50/60 seconds perhaps much faster? maybe we can give it an eagle animation
+-game is pretty good
+-add credits section
+-add another dog after 30 seconds perhaps? 
+-music and sound adjustment
 
--Player jump and velocity [COMPLETE]
-    -Jump higher, faster gravity
-    -double jump?? low priority if time
-
--Crouch mechanism
-    -shouldn't be too hard to implement, crouch underneath things
-    -lowkey unecessary, double jump carries
-    -maybe jump cancel?
-
--Platforms 
-    -Try to get TA's help or professors help to make it more "seamless" priority/level low
 
 */

@@ -16,7 +16,7 @@ class Load extends Phaser.Scene{
         this.load.image('ground', './assets/ground.png')
 
         
-        this.load.image('sun', './assets/sun.png')
+        this.load.image('moon', './assets/moon.png')
 
         //platform
         this.load.image('platform','/assets/platform.png')

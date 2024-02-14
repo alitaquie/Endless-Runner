@@ -20,9 +20,9 @@ class Menu extends Phaser.Scene{
     create(){
         this.cameras.main.setBackgroundColor('#e2e670');
         let menuConfig = {
-            fontFamily: 'Courier New',
+            fontFamily: 'fantasy',
             fontSize: '30px',
-            backgroundColor: '#000000',
+            backgroundColor: '#e2e670',
             color: '#000000',
             align: 'right',
             padding: {
@@ -34,9 +34,8 @@ class Menu extends Phaser.Scene{
         this.add.image(game.config.width/2, game.config.height/4, 'menuTitle').setScale(0.5).setOrigin(0.5); // Add your image to the scene
         this.add.image(game.config.width/2, game.config.height/1.6, 'TitleCat').setScale(6).setOrigin(0.5); 
         //menu text
-        //this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'SUPER MIKKIE', menuConfig).setOrigin(0.5);
-        // this.add.text(game.config.width/2, game.config.height/2, 'Use "SPACEBAR" to avoid obstacles', menuConfig).setOrigin(0.5);
-        // this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press SPACEBAR to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.13, 'Use "SPACEBAR" to double-jump and avoid obstacles', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.15 + borderUISize + borderPadding, 'Press SPACEBAR to start', menuConfig).setOrigin(0.5);
         
         //define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
