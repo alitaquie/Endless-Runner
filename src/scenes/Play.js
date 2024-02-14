@@ -100,7 +100,7 @@ class Play extends Phaser.Scene {
             delay: 60000, // 60 seconds in milliseconds
             callback: () => {
                 // Create the second bird
-                this.bird2 = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
+                this.bird2 = this.physics.add.sprite(game.config.width / 1.5, this.game.config.height / 4.5, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
                 this.bird2.body.setSize(8, 10).setOffset(20,20);
                 this.bird2Speed = this.bird2.body.setVelocityX(-150);
                 this.bird2.anims.play('run2');
@@ -364,10 +364,8 @@ class Play extends Phaser.Scene {
 /*
 Programming tasks we want to do:
 
--game is pretty good
 -add credits section
--add another dog after 30 seconds perhaps? 
--music and sound adjustment
+-turn off debug
 
 
 */
