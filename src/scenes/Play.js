@@ -57,16 +57,20 @@ class Play extends Phaser.Scene {
         this.birdSpeed = this.bird.body.setVelocityX(-150)
         this.bird.anims.play('run2');
 
+        this.growl = this.sound.add('growl', { volume: 1 });
+        this.eagle = this.sound.add('eagle', { volume: 1 });
+
         //dog creation
         this.dogCreated = false;
         this.time.addEvent({
-            delay: 8000, // 10 seconds in milliseconds
+            delay: 9000, // 10 seconds in milliseconds
             callback: () => {
                 this.dog = this.physics.add.sprite(game.config.width / 1.5, game.config.height / 1.5, 'dog', 'dog 0.png').setScale(5).setOrigin(0.5);
                 this.dog.body.setSize(8, 10).setOffset(20,20);
                 this.dogSpeed = this.dog.body.setVelocityX(-150);
                 this.dog.anims.play('run3');
                 this.dogCreated = true;
+                this.growl.play()
             },
             callbackScope: this,
             loop: false 
@@ -83,6 +87,7 @@ class Play extends Phaser.Scene {
                  this.dog2.anims.play('run3');
                  this.dog2Created = true;
                  //play growling sound
+                 this.growl.play()
              },
              callbackScope: this,
              loop: false 
@@ -100,6 +105,7 @@ class Play extends Phaser.Scene {
                 this.bird2Speed = this.bird2.body.setVelocityX(-150);
                 this.bird2.anims.play('run2');
                 this.birdCreated = true;
+                this.eagle.play()
             },
             callbackScope: this,
             loop: false // Set to true if you want the event to repeat
@@ -146,8 +152,10 @@ class Play extends Phaser.Scene {
         };
 
         this.music = this.sound.add('bgm', loopConfig);
-        this.speedUp = this.sound.add('speedUp', { volume: 0.2 });
+        // this.speedUp = this.sound.add('speedUp', { volume: 0.2 });
         this.dead = this.sound.add('dead', { volume: 0.2 });
+        this.yowl = this.sound.add('yowl', { volume: 0.2 });
+        
 
         // Pause music
         if (!this.gameOver) {
@@ -197,8 +205,8 @@ class Play extends Phaser.Scene {
 
         if(this.dog2Created){
             this.time.delayedCall(1000,()=>{
-                this.dogSpeed = this.dog.body.setVelocityX(-400);
-                this.dog2Speed = this.dog2.body.setVelocityX(-400);
+                //this.dogSpeed = this.dog.body.setVelocityX(-400);
+                this.dog2Speed = this.dog2.body.setVelocityX(-405);
             },null,this)
         }
         if (this.dog2 && this.dog2.x <= 0) {
@@ -210,7 +218,6 @@ class Play extends Phaser.Scene {
 
         if(this.birdCreated){
             this.time.delayedCall(1000,()=>{
-                this.birdSpeed = this.bird.body.setVelocityX(-450);
                 this.bird2Speed = this.bird2.body.setVelocityX(-450);
             },null,this)
         }
@@ -293,7 +300,7 @@ class Play extends Phaser.Scene {
         if (timer > highScore) {
             highScore = timer;
         }
-
+        this.yowl.play();
         this.dead.play();
         this.music.stop();
         this.gameOver = true;

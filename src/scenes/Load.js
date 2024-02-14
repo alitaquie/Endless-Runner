@@ -27,7 +27,11 @@ class Load extends Phaser.Scene{
         //sound effects
         this.load.audio('jump', './assets/jump.mp3')
         this.load.audio('select', './assets/select.mp3')
-        this.load.audio('speedUp', './assets/speedUp.mp3')
+        this.load.audio('growl', './assets/growl.mp3')
+        this.load.audio('yowl', './assets/yowl.mp3')
+        this.load.audio('eagle', './assets/eagle.mp3')
+
+        // this.load.audio('speedUp', './assets/speedUp.mp3')
         this.load.audio('dead', './assets/dead.mp3')
 
 
