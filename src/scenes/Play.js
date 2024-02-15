@@ -246,7 +246,7 @@ class Play extends Phaser.Scene {
                     this.jumpCount++;
         
                     if (this.jumpCount === 2) {
-                        // Play double jump sound
+                        // Play double jump sound??
                     }
                     this.canJump = false;
                 }
