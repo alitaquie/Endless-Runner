@@ -19,7 +19,7 @@ class Load extends Phaser.Scene{
         this.load.image('moon', './assets/moon.png')
 
         //platform
-        this.load.image('platform','/assets/platform.png')
+        this.load.image('platform','./assets/platform.png')
 
         //bgm
         this.load.audio('bgm', './assets/bgm.mp3')

@@ -3,9 +3,9 @@ class Play extends Phaser.Scene {
         super("playScene")
     }
     init(){
-        this.platformWidth = 31;  // Replace with the actual width of your platform
-        this.platformHeight = 10;  // Replace with the actual height of your platform
-        this.platformOffsetX = 0;  // Replace with the actual X offset of your platform
+        this.platformWidth = 31;  
+        this.platformHeight = 10;  
+        this.platformOffsetX = 0;  
         this.platformOffsetY = 8;  //platform initliazes            
     }  
 
@@ -246,7 +246,7 @@ class Play extends Phaser.Scene {
                     this.jumpCount++;
         
                     if (this.jumpCount === 2) {
-                        // Play double jump sound??
+                        // Play double jump sound
                     }
                     this.canJump = false;
                 }
