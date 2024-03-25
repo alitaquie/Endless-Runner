@@ -24,10 +24,48 @@ class Play extends Phaser.Scene {
 
 
         // Create platforms
-        this.platform1 = this.createPlatform(game.config.width / 4, 'platform').setScale(3).setOrigin(0.5);
-        this.platform2 = this.createPlatform(game.config.width / 2, 'platform').setScale(3).setOrigin(0.5);
-        this.platform3 = this.createPlatform(game.config.width / 1.3, 'platform').setScale(3).setOrigin(0.5);
-        this.platform4 = this.createPlatform(game.config.width / 1, 'platform').setScale(3).setOrigin(0.5);
+        this.platform1 = this.createPlatform(game.config.width, 'platform').setScale(3).setOrigin(0.5);
+
+        this.plat2_existed = false;
+        this.time.addEvent({
+            delay: 1000,
+            callback: () =>{
+                this.platform2 = this.createPlatform(game.config.width, 'platform').setScale(3).setOrigin(0.5);
+                this.plat2_existed = true;
+            },
+            callbackScope: this,
+            loop: false
+
+        });
+
+        this.plat3_existed = false;
+        this.time.addEvent({
+            delay: 2000,
+            callback: () =>{
+                this.platform3 = this.createPlatform(game.config.width, 'platform').setScale(3).setOrigin(0.5);
+                this.plat3_existed = true;
+            },
+            callbackScope: this,
+            loop: false
+
+        });
+
+        this.plat4_existed = false;
+        this.time.addEvent({
+            delay: 3000,
+            callback: () =>{
+                this.platform4 = this.createPlatform(game.config.width, 'platform').setScale(3).setOrigin(0.5);
+                this.plat4_existed = true;
+            },
+            callbackScope: this,
+            loop: false
+
+        });
+
+
+        // this.platform2 = this.createPlatform(game.config.width / 2, 'platform').setScale(3).setOrigin(0.5);
+        // this.platform3 = this.createPlatform(game.config.width / 1.3, 'platform').setScale(3).setOrigin(0.5);
+        // this.platform4 = this.createPlatform(game.config.width / 1, 'platform').setScale(3).setOrigin(0.5);
         
 
         //moon
@@ -174,15 +212,42 @@ class Play extends Phaser.Scene {
         this.background.tilePositionX -= -1 * 2;
 
         // Platform reset
-        this.resetPlatform(this.platform1);
-        this.resetPlatform(this.platform2);
-        this.resetPlatform(this.platform3);
-        this.resetPlatform(this.platform4);
+        //this.resetPlatform(this.platform1);
+        // this.resetPlatform(this.platform2);
+        // this.resetPlatform(this.platform3);
+        // this.resetPlatform(this.platform4);
 
 
         //bird logic handling
         let random = Phaser.Math.Between(0 + this.bird.height / 1.21, game.config.height / 2.1)
         let random2 = Phaser.Math.Between(0 + this.bird.height / 1, game.config.height / 2)
+
+        if(this.platform1.x <=0){
+            this.platform1.x = game.config.width + 50
+            this.platform1.y = this.getRandomHeight()
+        }
+
+        if(this.plat2_existed){
+        if(this.platform2.x <=0){
+            this.platform2.x = game.config.width + 50
+            this.platform2.y = this.getRandomHeight()
+        }
+        }
+
+        if(this.plat3_existed){
+            if(this.platform3.x <=0){
+                this.platform3.x = game.config.width + 50
+                this.platform3.y = this.getRandomHeight()
+            }
+        }
+
+        if(this.plat4_existed){
+            if(this.platform4.x <=0){
+                this.platform4.x = game.config.width + 50
+                this.platform4.y = this.getRandomHeight()
+            }
+        }
+
 
         this.time.delayedCall(1000,()=>{
             this.birdSpeed = this.bird.body.setVelocityX(-500);
@@ -356,16 +421,3 @@ class Play extends Phaser.Scene {
 }
 
 
-
-
-
-
-
-/*
-Programming tasks we want to do:
-
--add credits section
--turn off debug
-
-
-*/
